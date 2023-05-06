@@ -1,0 +1,7 @@
+使用前先创建虚拟环境
+django-admin startproject bookmanager 创建项目book manager
+命令行项目运行入口为manage.py
+运行命令为 python manage.py runserver
+默认访问 http://127.0.0.1:8000/
+子功能模块划分为子应用
+创建子应用 python mange.py startapp app_name
