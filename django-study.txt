@@ -9,4 +9,7 @@ model层内嵌orm开发，不需要直接面向对象，定义模型类完成数
 ORM全称Object Relational Mapping，即对象关系映射，是在pymysq之上又进行了一层封装，
 对于数据的操作，我们无需再去编写原生sql，取代代之的是基于面向对象的思想去编写类、对象、
 调用相应的方法等，ORM会将其转换/映射成原生SQL然后交给pymysql执行
-
+模型迁移 （建表）前要先注册子应用
+生成迁移文件：根据模型类生成创建表的语句python manage.py makemigrations
+执行迁移：根据第一步生成的语句在数据库中创建表python manage.py migrate
+生成的数据库在settings的databases，保存在sqlite3中（关系数据库）
