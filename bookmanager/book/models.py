@@ -12,6 +12,10 @@ class BookInfo(models.Model):
     # 相当于varchar(10)
     name = models.CharField(max_length=10)
 
+    def __str__(self):
+        # 重写str方法使得显示name
+        return self.name
+
 
 class PeopleInfo(models.Model):
     name = models.CharField(max_length=10)

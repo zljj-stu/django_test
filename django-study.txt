@@ -13,3 +13,6 @@ ORM全称Object Relational Mapping，即对象关系映射，是在pymysq之上�
 生成迁移文件：根据模型类生成创建表的语句python manage.py makemigrations
 执行迁移：根据第一步生成的语句在数据库中创建表python manage.py migrate
 生成的数据库在settings的databases，保存在sqlite3中（关系数据库）
+创建管理员的命令 python manage.py createsuperuser
+在应用的admin.py文件中注册模型类需要导入模型模块 :from book.models import BookInfo,PeopleInfo
+sqlite只允许单线程连接，进行操作时需要保证其他的数据库连接断开
