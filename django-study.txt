@@ -17,3 +17,11 @@ ORM全称Object Relational Mapping，即对象关系映射，是在pymysq之上�
 在应用的admin.py文件中注册模型类需要导入模型模块 :from book.models import BookInfo,PeopleInfo
 sqlite只允许单线程连接，进行操作时需要保证其他的数据库连接断开
 模板数据用{{name}}形式
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+当前工程的根目录，Django会依此来定位工程内的相关文件，我们也可以使用该参数来构造文件路径
+os.path.dirname（）获取文件目录
+调试模式，创建工程后初始值为True，即默认工作在调试模式下
+为了提供静态文件，需要配置两个参数：
+    STATICFILES_DIRS存放查找静态文件的目录
+    STATIC_URL访问静态文件的URL前缀
+
