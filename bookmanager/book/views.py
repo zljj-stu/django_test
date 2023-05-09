@@ -8,4 +8,6 @@ from django.http import HttpResponse
 2、必须返回响应response(HttpResponse的类对象)
 '''
 def index(request):
-    return HttpResponse('ok')
+    # return HttpResponse('ok')
+    context = {'name' : '点击一下吧'}
+    return render(request, 'index.html', context=context)

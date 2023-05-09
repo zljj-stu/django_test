@@ -16,3 +16,4 @@ ORM全称Object Relational Mapping，即对象关系映射，是在pymysq之上�
 创建管理员的命令 python manage.py createsuperuser
 在应用的admin.py文件中注册模型类需要导入模型模块 :from book.models import BookInfo,PeopleInfo
 sqlite只允许单线程连接，进行操作时需要保证其他的数据库连接断开
+模板数据用{{name}}形式
