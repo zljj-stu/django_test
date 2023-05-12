@@ -5,4 +5,4 @@ class BookConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'book'
     # AppConfig.verbose_name属性用于设置该应用的直观可读的名字
-    verbose_name = '书籍管理'
+    # verbose_name = '书籍管理'
