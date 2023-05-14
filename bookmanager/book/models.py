@@ -14,7 +14,7 @@ from django.db import models
 class BookInfo(models.Model):
     # 相当于varchar(10)
     name = models.CharField(max_length=10, unique=True)
-    pub_name=models.DateField(null=True)
+    pub_date=models.DateField(null=True)
     # 阅读量
     readcount=models.IntegerField(default=0)
     # 评论量
