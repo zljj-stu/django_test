@@ -24,4 +24,5 @@ os.path.dirname（）获取文件目录
 为了提供静态文件，需要配置两个参数：
     STATICFILES_DIRS存放查找静态文件的目录
     STATIC_URL访问静态文件的URL前缀
+Django的manage工具提供了shell命令，帮助我们配置好当前工程的运行环境python manage.py shell
 
