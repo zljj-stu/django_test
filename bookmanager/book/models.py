@@ -32,14 +32,15 @@ class BookInfo(models.Model):
 
 
 class PeopleInfo(models.Model):
+
+    name = models.CharField(max_length=10, unique=True)
+    gender = models.SmallIntegerField(choices=GENDER_CHOICE, default=1)
+    # 外键约束，人数属于那本书;系统自动为外键添加_id;删除时级联删除
     # 定义一个有序字典
     GENDER_CHOICE = (
         (1, 'male'),
         (2, 'female'),
     )
-    name = models.CharField(max_length=10, unique=True)
-    gender = models.SmallIntegerField(choices=GENDER_CHOICE, default=1)
-    # 外键约束，人数属于那本书;系统自动为外键添加_id;删除时级联删除
     book = models.ForeignKey(BookInfo, on_delete=models.CASCADE)
     description = models.CharField(max_length=100, null=True)
     is_delete = models.BooleanField(default=False)

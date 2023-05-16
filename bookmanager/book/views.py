@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponse
-from book.models import BookInfo
+from book.models import BookInfo, PeopleInfo
 # Create your views here.
 '''
 视图函数有以下要求
@@ -94,3 +94,53 @@ from django.db.models import Q
 book = BookInfo.objects.filter(Q(id__gt=3) | Q(readcount__gt=20))
 # Q对象可以使用&、|连接，&表示逻辑与，|表示逻辑或,Q对象前可以使用~操作符，表示非not
 book = BookInfo.objects.filter(~Q(id=3))
+# 聚合函数,使用aggregate()过滤器调用聚合函数,aggregate的返回值是一个字典类型{'属性名__聚合类小写':值},count时一般不使用aggregate()过滤器
+from django.db.models import Sum, Avg, Count, Max, Min
+num = BookInfo.objects.aggregate(Sum('readcount'))
+num = BookInfo.objects.count()
+# 使用order_by对结果进行排序,默认升序
+book = BookInfo.objects.all().order_by('readcount')
+# 降序
+book = BookInfo.objects.all().order_by('-readcount')
+# 级联查询
+# 查询书籍为1的所有人物信息
+# 由一到多的访问语法：一对应的模型类对象.多对应的模型类名小写_set 例：
+book = BookInfo.objects.get(id=1)
+book.peopleinfo_set.all()
+# 查询人物为1的书籍信息
+person = PeopleInfo.objects.get(id=1)
+# 关联的过滤查询,关联模型类名小写__属性名__条件运算符=值
+# 查询图书，要求图书人物为"郭靖"
+BookInfo.objects.filter(peopleinfo__name__exact='郭靖')
+# 查询图书，要求图书中人物的描述包含"八"
+book = BookInfo.objects.filter(peopleinfo__description__contains='八')
+# 查询书名为“天龙八部”的所有人物
+people = PeopleInfo.objects.filter(book__name='天龙八部')
+# 查询图书阅读量大于30的所有人物
+people = PeopleInfo.objects.filter(book__readcount__gt=30)
+# Django的ORM中存在查询集的概念。
+#
+# 查询集，也称查询结果集、QuerySet，表示从数据库中获取的对象集合。
+#
+# 当调用如下过滤器方法时，Django会返回查询集（而不是简单的列表）：
+#
+#     all()：返回所有数据。
+#     filter()：返回满足条件的数据。
+#     exclude()：返回满足条件之外的数据。
+#     order_by()：对结果进行排序。
+#
+# 对查询集可以再次调用过滤器进行过滤
+# 创建查询集不会访问数据库，直到调用数据时，才会访问数据库，调用数据的情况包括迭代、序列化、与if合用
+# 使用同一个查询集，第一次使用时会发生数据库的查询，然后Django会把结果缓存下来，再次使用这个查询集时会使用缓存的数据，减少了数据库的查询次数。
+# 可以对查询集进行取下标或切片操作，等同于sql中的limit和offset子句。不支持负数索引
+# 分页
+#查询数据
+books = BookInfo.objects.all()
+#导入分页类
+from django.core.paginator import Paginator
+#创建分页实例
+paginator=Paginator(books,2)
+#获取指定页码的数据
+page_books = paginator.page(1)
+#获取分页数据
+total_page=paginator.num_pages
