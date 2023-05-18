@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponse
 from book.models import BookInfo, PeopleInfo
+import json
 # Create your views here.
 '''
 视图函数有以下要求
@@ -21,6 +22,25 @@ def shop(request, city_id, shop_id):
     # querydict允许一键多值，getlist获取多值，get获取最后一个
     print(city_id, shop_id, query_params, query_params.getlist('order'), query_params['order'])
     return HttpResponse('zlj')
+
+def register(request):
+    data = request.POST
+    print(data)
+    return HttpResponse('ok')
+
+def json_learn(request):
+    # json数据不能request.POST获取，而是body
+    body = request.body
+    # 获取数据显示为b'{\r\n    "name":"zlj",\r\n    "age":24\r\n}'，要转换字符串body.decode()
+    # 字符串为{
+    #     "name":"zlj",
+    #     "age":24
+    # }
+    # 进一步转为字典
+    body_str = body.decode()
+    body_dict = json.loads(body_str)
+    print(body_dict)
+    return HttpResponse('json')
 
 
 # # 增加信息
