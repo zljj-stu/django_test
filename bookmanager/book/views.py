@@ -3,12 +3,15 @@ from django.http import HttpRequest
 from django.http import HttpResponse
 from book.models import BookInfo, PeopleInfo
 import json
+
 # Create your views here.
 '''
 视图函数有以下要求
 1、接受请求request(HttpRequest的类对象)
 2、必须返回响应response(HttpResponse的类对象)
 '''
+
+
 def index(request):
     # return HttpResponse('ok')
     books = BookInfo.objects.all()
@@ -16,17 +19,24 @@ def index(request):
     # return render(request, 'index.html', context=context)
     return HttpResponse('index')
 
+
 def shop(request, city_id, shop_id):
+    # import re
+    # if not re.match('\d{5}', shop_id):
+    #     return HttpResponse('error')
     # 获取查询参数,返回一个字典
     query_params = request.GET
     # querydict允许一键多值，getlist获取多值，get获取最后一个
-    print(city_id, shop_id, query_params, query_params.getlist('order'), query_params['order'])
+    # print(city_id, shop_id, query_params, query_params.getlist('order'), query_params['order'])
+    print(city_id, shop_id)
     return HttpResponse('zlj')
+
 
 def register(request):
     data = request.POST
     print(data)
     return HttpResponse('ok')
+
 
 def json_learn(request):
     # json数据不能request.POST获取，而是body
@@ -39,9 +49,17 @@ def json_learn(request):
     # 进一步转为字典
     body_str = body.decode()
     body_dict = json.loads(body_str)
-    print(body_dict)
+    print(body_dict, end='\n')
+    # 请求头
+    head = request.META
+    print(head)
     return HttpResponse('json')
 
+
+def method(request):
+    # 获取请求方式
+    print(request.method)
+    return HttpResponse('method')
 
 # # 增加信息
 # # 方式一,保存到数据库必须调用save方法
