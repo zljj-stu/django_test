@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpRequest
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from book.models import BookInfo, PeopleInfo
 import json
 
@@ -60,6 +60,40 @@ def method(request):
     # 获取请求方式
     print(request.method)
     return HttpResponse('method')
+
+
+def res(request):
+    res = HttpResponse('res', status=200)
+    res['name'] = 'zlj'
+    return res
+
+
+def json_res(request):
+    info = {
+        'name': 'zlj',
+        'age': 24,
+    }
+    list_info= [
+        {
+            'name': 'zlj',
+            'age': 24,
+        },
+        {
+            'name': 'wyr',
+            'age': 23,
+        }
+    ]
+    # 响应数据一般为字典
+    # safe默认为true即传递字典，为false可传递其他数据类型但问题自负
+    # res = JsonResponse(data=info, safe=True)
+    # json.dumps将python对象转换为json对象
+    list = json.dumps(list_info)
+    res = JsonResponse(data=list, safe=False)
+    return res
+
+def redir(request):
+    # 重定向
+    return redirect('http://www.bilibili.com')
 
 # # 增加信息
 # # 方式一,保存到数据库必须调用save方法

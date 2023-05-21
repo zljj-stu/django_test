@@ -31,4 +31,7 @@ urlpatterns = [
     path('register/', register),
     path('json/', json_learn),
     path('method/', method),
+    path('res/', res),
+    path('jsres/', json_res),
+    path('redir/', redir),
 ]
