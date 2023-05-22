@@ -34,4 +34,6 @@ urlpatterns = [
     path('res/', res),
     path('jsres/', json_res),
     path('redir/', redir),
+    path('cookie/', set_cookie),
+    path('get_cookie/', get_cookie),
 ]

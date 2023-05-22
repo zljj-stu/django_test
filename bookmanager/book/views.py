@@ -73,7 +73,7 @@ def json_res(request):
         'name': 'zlj',
         'age': 24,
     }
-    list_info= [
+    list_info = [
         {
             'name': 'zlj',
             'age': 24,
@@ -91,9 +91,34 @@ def json_res(request):
     res = JsonResponse(data=list, safe=False)
     return res
 
+
 def redir(request):
     # 重定向
     return redirect('http://www.bilibili.com')
+
+
+def set_cookie(request):
+    # 携带查询字符串请求，服务器设置cookie，浏览器收到后保存cookie
+    # http://127.0.0.1:8000/cookie/?username=zlj&password=123456
+    # 往后的请求都会携带cookie信息，服务器读取cookie，判断用户身份
+    '''#########'''
+    # 回去查询字符串
+    username = request.GET.get('username')
+    # 服务器设置cookie
+    res = HttpResponse('set_cookie')
+    # key,value,max_age是从响应开始计时的一个秒数
+    res.set_cookie('name', username, max_age=60*5)
+
+    return res
+
+
+def get_cookie(request):
+    # 获取cookie,request.COOKIES字典
+    # print(request.COOKIES)
+    name = request.COOKIES.get('name')
+    # 可以通过HttpResponse对象中的delete_cookie方法来删除。
+    # response.delete_cookie('itcast2')
+    return HttpResponse(name)
 
 # # 增加信息
 # # 方式一,保存到数据库必须调用save方法

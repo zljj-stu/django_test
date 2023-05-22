@@ -25,4 +25,8 @@ os.path.dirname（）获取文件目录
     STATICFILES_DIRS存放查找静态文件的目录
     STATIC_URL访问静态文件的URL前缀
 Django的manage工具提供了shell命令，帮助我们配置好当前工程的运行环境python manage.py shell
-
+在客户端存储信息使用Cookie
+Cookie以键值对的格式进行信息的存储。
+Cookie基于域名安全，不同域名的Cookie是不能互相访问的，如访问itcast.cn时向浏览器中写了Cookie信息，使用同一浏览器访问baidu.com时，无法访问到itcast.cn写的Cookie信息
+浏览器请求某网站时，会将浏览器存储的跟网站相关的所有Cookie信息提交给网站服务器
+在服务器端存储信息使用Session
