@@ -120,6 +120,31 @@ def get_cookie(request):
     # response.delete_cookie('itcast2')
     return HttpResponse(name)
 
+
+def set_session(request):
+    # http://127.0.0.1:8000/set_session/?username=zlj&password=123456,第一次请求服务端设置session
+    # 服务端生成有sessionid的cookie
+    # 浏览器接收信息后保存cookie
+    # 之后浏览器的请求，都会携带sessionid的信息，服务端验证通过后实现业务逻辑
+    '''####'''
+    # 获取用户信息
+    username = request.GET.get('username')
+    # 设置session信息
+    user_id = 1
+    request.session['user_id'] = user_id
+    request.session['username'] = username
+    return HttpResponse('set_session')
+
+
+def get_session(request):
+    # user_id = request.session['user_id']
+    # username = request.session['username']
+    # 为减少异常发生使用get
+    user_id = request.session.get('user_id')
+    username = request.session.get('username')
+    content = "{},{}".format(user_id, username)
+    return HttpResponse(content)
+
 # # 增加信息
 # # 方式一,保存到数据库必须调用save方法
 # books=BookInfo(

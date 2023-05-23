@@ -30,3 +30,4 @@ Cookie以键值对的格式进行信息的存储。
 Cookie基于域名安全，不同域名的Cookie是不能互相访问的，如访问itcast.cn时向浏览器中写了Cookie信息，使用同一浏览器访问baidu.com时，无法访问到itcast.cn写的Cookie信息
 浏览器请求某网站时，会将浏览器存储的跟网站相关的所有Cookie信息提交给网站服务器
 在服务器端存储信息使用Session
+session依赖于cookie
