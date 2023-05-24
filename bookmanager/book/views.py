@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.http import HttpResponse, JsonResponse
 from book.models import BookInfo, PeopleInfo
+# 定义类视图用
+from django.views import View
 import json
 
 # Create your views here.
@@ -133,6 +135,17 @@ def set_session(request):
     user_id = 1
     request.session['user_id'] = user_id
     request.session['username'] = username
+    # 清除所有session，在存储中删除值部分。
+    # request.session.clear()
+    # 清除session数据，在存储中删除session的整条数据。
+    # request.session.flush()
+    # 删除session中的指定键及值，在存储中只删除某个键及对应的值。
+    # del request.session['键']
+    # 设置session的有效期
+    # 如果value是一个整数，session将在value秒没有活动后过期。
+    # 如果value为0，那么用户session的Cookie将在用户的浏览器关闭时过期。
+    # 如果value为None，那么session有效期将采用系统默认值， 默认为两周，可以通过在settings.py中设置SESSION_COOKIE_AGE来设置全局默认值
+    request.session.set_expiry(value=0)
     return HttpResponse('set_session')
 
 
@@ -144,6 +157,31 @@ def get_session(request):
     username = request.session.get('username')
     content = "{},{}".format(user_id, username)
     return HttpResponse(content)
+
+
+#######################类视图#######################
+def login(request):
+    if request.method=='GET':
+        return HttpResponse('get')
+    else:
+        return HttpResponse('post')
+'''
+类视图的定义
+class Name(View):
+    def get(self,request):
+        return httpresponse
+        
+    def http_method_lower(self,request):
+        return httpresponse
+类视图中的方法用小写来区分不同的请求方式
+'''
+class LoginView(View):
+    def get(self, request):
+        return HttpResponse("class get")
+    def post(self, request):
+        return HttpResponse("class post")\
+
+
 
 # # 增加信息
 # # 方式一,保存到数据库必须调用save方法

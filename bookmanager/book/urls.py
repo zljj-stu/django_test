@@ -38,4 +38,7 @@ urlpatterns = [
     path('get_cookie/', get_cookie),
     path('set_session/', set_session),
     path('get_session/', get_session),
+    path('login/', login),
+    # 类视图的路由定义
+    path('xlogin/', LoginView.as_view()),
 ]
