@@ -41,4 +41,5 @@ urlpatterns = [
     path('login/', login),
     # 类视图的路由定义
     path('xlogin/', LoginView.as_view()),
+    path('orderview/', OrderView.as_view()),
 ]

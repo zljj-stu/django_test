@@ -109,7 +109,7 @@ def set_cookie(request):
     # 服务器设置cookie
     res = HttpResponse('set_cookie')
     # key,value,max_age是从响应开始计时的一个秒数
-    res.set_cookie('name', username, max_age=60*5)
+    res.set_cookie('name', username, max_age=60 * 5)
 
     return res
 
@@ -161,10 +161,12 @@ def get_session(request):
 
 #######################类视图#######################
 def login(request):
-    if request.method=='GET':
+    if request.method == 'GET':
         return HttpResponse('get')
     else:
         return HttpResponse('post')
+
+
 '''
 类视图的定义
 class Name(View):
@@ -175,11 +177,39 @@ class Name(View):
         return httpresponse
 类视图中的方法用小写来区分不同的请求方式
 '''
+
+
 class LoginView(View):
     def get(self, request):
         return HttpResponse("class get")
+
     def post(self, request):
-        return HttpResponse("class post")\
+        return HttpResponse("class post")
+
+
+# 假设该页面需要登录才能访问，否侧跳转登陆页面
+# LoginRequiredMixin用于判断用户登录，登录则访问页面
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+# 用多继承来实现LoginRequiredMixin,多继承注意顺序
+class OrderView(LoginRequiredMixin, View):
+    def get(self, request):
+        # # 模拟标记位
+        # islogin = False
+        # if not islogin:
+        #     return HttpResponse('尚未登陆，跳转页面中')
+        return HttpResponse("get必须登录")
+
+    def post(self, request):
+        return HttpResponse("post必须登录")
+
+
+# 打印当前mro顺序
+# print(OrderView.__mro__)
+
+
+
 
 
 
