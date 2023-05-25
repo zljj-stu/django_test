@@ -109,7 +109,7 @@ def set_cookie(request):
     # 服务器设置cookie
     res = HttpResponse('set_cookie')
     # key,value,max_age是从响应开始计时的一个秒数
-    res.set_cookie('name', username, max_age=60 * 5)
+    res.set_cookie('username', username, max_age=60 * 5)
 
     return res
 

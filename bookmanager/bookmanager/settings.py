@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'book.apps.BookConfig',  # 方案二
 ]
 
+# 中间件
 MIDDLEWARE = [
+    # 在请求视图被处理前，中间件由上至下依次执行
+    # 在请求视图被处理后，中间件由下至上依次执行
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,6 +53,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 加入自定义中间件
+    'book.middleware.TestMiddleWare',
+    'book.middleware.TestMiddleWare2',
+
 ]
 
 ROOT_URLCONF = 'bookmanager.urls'
