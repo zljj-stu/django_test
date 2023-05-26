@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- 开发环境版本 -->
+    <!--导入vue.js开发环境-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<!--第一一个标签用于接管标签的内容-->
+<div id="app">
+  <!--此处写HTML-->
+  {{ message }}
+  <!-- v-bind绑定元素属性，简写直接:即可 -->
+  <!-- <a v-bind:href="next" v-if="isLogin">{{info}}</a> -->
+  <!-- v-else要紧跟 v-if后边 -->
+  <a href="#" v-if="isLogin">个人中心</a>
+  <a v-bind:href="next" v-else>{{info}}</a>
+  <a href="#" v-if="level==1">zlj</a>
+  <a href="#"v-else-if="level==2">wyr</a>
+  <a href="#" v-else="level==3">wzy</a>
+  <!-- v-show用法和v-if大致一样，但是它不支持v-else,它和v-if的区别是，它制作元素样式的显示和隐藏，元素一直是存在的,注意在vue中使用v-show, 原来的css代码不能设置display属性, 会导致冲突 -->
+</div>
+</body>
+<script type="text/javascript">
+    // 定义一个变量并实例化
+var app = new Vue({
+    // 将id为app的组件与变量绑定
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    // 修改分隔符
+    // delimiters: ['[[',']]'],
+    info: '请登录！',
+    next: 'http://www.bilibili.com',
+    isLogin: true,
+    level:1,
+  }
+})
+</script>
+</html>
