@@ -22,6 +22,15 @@
   <a href="#"v-else-if="level==2">wyr</a>
   <a href="#" v-else="level==3">wzy</a>
   <!-- v-show用法和v-if大致一样，但是它不支持v-else,它和v-if的区别是，它制作元素样式的显示和隐藏，元素一直是存在的,注意在vue中使用v-show, 原来的css代码不能设置display属性, 会导致冲突 -->
+
+  <ul>
+    <!-- 固定第一个为数据，第二个为索引,先值后键 -->
+    <li v-for="(shop,index) in shops">第{{index+1}}个地方：{{shop}}</li>
+    <li v-for="(value,name) in object">
+      {{name}}:{{value }}
+    </li>
+    <li v-for="item in items">{{item.title}};{{item.author}};{{item.publishedAt}}</li>
+  </ul>
 </div>
 </body>
 <script type="text/javascript">
@@ -37,6 +46,31 @@ var app = new Vue({
     next: 'http://www.bilibili.com',
     isLogin: true,
     level:1,
+    shops:['伍家岗','秭归','夷陵','五峰'],
+    // 单个对象
+    object: {
+      title: 'How to do lists in Vue',
+      author: 'Jane Doe',
+      publishedAt: '2016-04-10'
+    },
+    // 多个对象
+    items: [
+       {
+        title: 'Vue',
+        author: 'Jane Doe',
+        publishedAt: '2016-04-10'
+      },
+      {
+        title: 'python',
+        author: 'Ricky',
+        publishedAt: '2019-04-10'
+      },
+      {
+        title: 'itcast',
+        author: 'itcast',
+        publishedAt: '2006-05-08'
+      }
+    ]
   }
 })
 </script>
