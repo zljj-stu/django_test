@@ -31,6 +31,44 @@
     </li>
     <li v-for="item in items">{{item.title}};{{item.author}};{{item.publishedAt}}</li>
   </ul>
+  <!-- 可以用v-on指令监听 DOM 事件，并在触发时运行一些 JavaScript 代码 -->
+  <button v-on:click="counter+=1">add1</button>
+  <ul>counter:{{counter}}</ul>
+  <hr>
+  <button v-on:click="add1">Add 2</button>
+  <button v-on:click="printf">Add 3</button>
+  <hr>
+  <table border="1">
+    <!-- 可以用v-model指令在表单<input>、<textarea>及<select>元素上创建双向数据绑定 -->
+    <!-- v-model会忽略所有表单元素的value、checked、selected特性的初始值而总是将 Vue 实例的数据作为数据来源。你应该通过 JavaScript 在组件的data选项中声明初始值 -->
+    <tr><td>用 户 名</td><td><input type="text" v-model="username" @blur="checkusername"> </td></tr>
+    <tr><td>密码</td><td><input type="password" v-model="password1"> </td></tr>
+    <tr><td>确认密码</td><td><input type="password" v-model="password2"></td></tr>
+    <tr><td>性别</td>
+      <td>
+        男<input type="radio" name="sex"  value="boy" v-model="sex"> 
+        女 <input type="radio" name="sex" value="girl" v-model="sex"></td>
+      </tr>
+    <tr><td>爱好</td>
+      <td>
+        足球 <input type="checkbox" name="like" value="足球" v-model="like"> 
+        篮球 <input type="checkbox" name="like" value="篮球" v-model="like">
+        兵乓球<input type="checkbox" name="like" value="兵乓球" v-model="like"> 
+      </td>
+    </tr>
+    <tr><td>所在城市</td>
+      <td>
+        <select name="city" v-model="city">
+          <option value="北京">北京</option>
+          <option value="上海">上海</option>
+          <option value="广州">广州</option>
+          <option value="深圳">深圳</option>
+        </select> 
+      </td>
+    </tr>
+    <tr><td>个人简介</td><td><textarea name="desc" v-model="desc"></textarea> </td></tr>
+  </table>
+  <button @click="register">注册</button>
 </div>
 </body>
 <script type="text/javascript">
@@ -47,6 +85,17 @@ var app = new Vue({
     isLogin: true,
     level:1,
     shops:['伍家岗','秭归','夷陵','五峰'],
+    // 记录点击
+    counter:1,
+    num:5,
+    // 表单元素
+    username:'',
+    password1:'',
+    password2:'',
+    sex:'',
+    like:[],
+    city:'',
+    desc:'',
     // 单个对象
     object: {
       title: 'How to do lists in Vue',
@@ -71,6 +120,23 @@ var app = new Vue({
         publishedAt: '2006-05-08'
       }
     ]
+    
+    
+  },
+  methods:{
+      add1:function(){
+        this.num+=1
+        alert(this.num)
+      },
+      printf:function(){
+        alert(this.counter)
+      },
+      register:function(){
+        alert(this.username+this.password1+this.password2+this.sex+this.like+this.city+this.desc)
+      },
+      checkusername:function(){
+        alert(this.username)
+      }
   }
 })
 </script>
