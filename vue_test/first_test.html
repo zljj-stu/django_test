@@ -69,6 +69,12 @@
     <tr><td>个人简介</td><td><textarea name="desc" v-model="desc"></textarea> </td></tr>
   </table>
   <button @click="register">注册</button>
+  <hr>
+  <input type="text" v-model="item"> <button @click="addtodo">添加</button>
+   <hr/>
+   <ul>
+    <li v-for="item in todos">{{item}}</li>
+   </ul>
 </div>
 </body>
 <script type="text/javascript">
@@ -88,6 +94,8 @@ var app = new Vue({
     // 记录点击
     counter:1,
     num:5,
+    todos:['学习Vue','学习Django基础','学习Django前台'],
+    item:'',
     // 表单元素
     username:'',
     password1:'',
@@ -136,6 +144,10 @@ var app = new Vue({
       },
       checkusername:function(){
         alert(this.username)
+      },
+      addtodo:function(){
+        // alert('ok')
+        this.todos.push(this.item)
       }
   }
 })
